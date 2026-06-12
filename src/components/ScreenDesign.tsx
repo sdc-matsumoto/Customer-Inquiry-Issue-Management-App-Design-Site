@@ -180,6 +180,173 @@ function IncidentListLayout() {
   );
 }
 
+// SCR004 Incident Form Layout
+function IncidentFormLayout() {
+  return (
+    <LayoutDiagram title="画面構成図">
+      <div className="border border-gray-400 rounded bg-white overflow-hidden">
+        <div className="bg-gray-700 text-white text-xs text-center py-1">ヘッダー</div>
+        <div className="p-2 space-y-2">
+          {/* 基本情報セクション */}
+          <div className="border border-gray-300 rounded">
+            <div className="bg-gray-100 px-2 py-1 text-xs font-semibold border-b border-gray-300">基本情報</div>
+            <div className="p-2 grid grid-cols-2 gap-1">
+              <div className="flex items-center gap-1">
+                <span className="text-xs text-gray-500 w-16">会社名</span>
+                <div className="flex-1 border border-gray-300 rounded px-1 py-0.5 text-xs text-gray-400">株式会社サンプル</div>
+              </div>
+              <div className="flex items-center gap-1">
+                <span className="text-xs text-gray-500 w-16">件名</span>
+                <div className="flex-1 border border-gray-300 rounded px-1 py-0.5 text-xs text-gray-400">インシデント件名</div>
+              </div>
+              <div className="flex items-center gap-1">
+                <span className="text-xs text-gray-500 w-16">ステータス</span>
+                <div className="flex-1 border border-gray-300 rounded px-1 py-0.5 text-xs text-gray-400 bg-gray-50">未対応</div>
+              </div>
+              <div className="flex items-center gap-1">
+                <span className="text-xs text-gray-500 w-16">担当者</span>
+                <div className="flex-1 border border-gray-300 rounded px-1 py-0.5 text-xs text-gray-400 bg-gray-50">山田 太郎</div>
+              </div>
+            </div>
+          </div>
+          {/* 対象情報セクション */}
+          <div className="border border-gray-300 rounded">
+            <div className="bg-gray-100 px-2 py-1 text-xs font-semibold border-b border-gray-300">対象情報</div>
+            <div className="p-2 grid grid-cols-2 gap-1">
+              <div className="flex items-center gap-1">
+                <span className="text-xs text-gray-500 w-16">対象区分</span>
+                <div className="flex-1 border border-gray-300 rounded px-1 py-0.5 text-xs text-gray-400 bg-gray-50">問合せ</div>
+              </div>
+              <div className="flex items-center gap-1">
+                <span className="text-xs text-gray-500 w-16">対象名</span>
+                <div className="flex-1 border border-gray-300 rounded px-1 py-0.5 text-xs text-gray-400">対象システム名</div>
+              </div>
+            </div>
+          </div>
+          {/* 内容セクション */}
+          <div className="border border-gray-300 rounded">
+            <div className="bg-gray-100 px-2 py-1 text-xs font-semibold border-b border-gray-300">内容</div>
+            <div className="p-2 space-y-1">
+              <div className="flex items-start gap-1">
+                <span className="text-xs text-gray-500 w-16">内容</span>
+                <div className="flex-1 border border-gray-300 rounded px-1 py-0.5 text-xs text-gray-400 h-8">問合せ内容...</div>
+              </div>
+              <div className="flex items-center gap-1">
+                <span className="text-xs text-gray-500 w-16">発生日</span>
+                <div className="flex-1 border border-gray-300 rounded px-1 py-0.5 text-xs text-gray-400">2024/01/15</div>
+              </div>
+            </div>
+          </div>
+          {/* 資料セクション */}
+          <div className="border border-gray-300 rounded">
+            <div className="bg-gray-100 px-2 py-1 text-xs font-semibold border-b border-gray-300">資料</div>
+            <div className="p-2 space-y-1">
+              <div className="flex items-center gap-1">
+                <span className="text-xs text-gray-500 w-16">添付ファイル</span>
+                <button className="border border-gray-300 rounded px-2 py-0.5 text-xs text-gray-600">ファイル選択</button>
+              </div>
+              <div className="text-xs text-gray-400 px-16">選択されていません</div>
+            </div>
+          </div>
+          {/* ボタンエリア */}
+          <div className="flex justify-end gap-2 pt-1">
+            <button className="border border-gray-300 px-3 py-1 rounded text-xs">戻る</button>
+            <button className="border border-gray-300 px-3 py-1 rounded text-xs">クリア</button>
+            <button className="bg-blue-600 text-white px-3 py-1 rounded text-xs">保存</button>
+          </div>
+        </div>
+      </div>
+    </LayoutDiagram>
+  );
+}
+
+// SCR005 Incident Detail Layout
+function IncidentDetailLayout() {
+  return (
+    <LayoutDiagram title="画面構成図">
+      <div className="border border-gray-400 rounded bg-white overflow-hidden">
+        <div className="bg-gray-700 text-white text-xs text-center py-1">ヘッダー</div>
+        <div className="p-2 space-y-2">
+          {/* インシデント情報（表示のみ） */}
+          <div className="border border-gray-300 rounded">
+            <div className="bg-gray-100 px-2 py-1 text-xs font-semibold border-b border-gray-300 flex justify-between">
+              <span>インシデント情報</span>
+              <span className="text-gray-500">表示のみ</span>
+            </div>
+            <div className="p-2 grid grid-cols-3 gap-1 text-xs">
+              <div><span className="text-gray-500">会社名:</span> 株式会社サンプル</div>
+              <div><span className="text-gray-500">件名:</span> インシデント件名</div>
+              <div><span className="text-gray-500">ステータス:</span> <span className="bg-blue-100 text-blue-700 px-1 rounded">対応中</span></div>
+              <div><span className="text-gray-500">担当者:</span> 山田 太郎</div>
+              <div><span className="text-gray-500">対象区分:</span> 問合せ</div>
+              <div><span className="text-gray-500">対象名:</span> 対象システム</div>
+            </div>
+          </div>
+          {/* 対応履歴テーブル */}
+          <div className="border border-gray-300 rounded">
+            <div className="bg-gray-100 px-2 py-1 text-xs font-semibold border-b border-gray-300">対応履歴</div>
+            <div className="p-2">
+              <table className="w-full text-xs border-collapse">
+                <thead>
+                  <tr className="bg-gray-50">
+                    <th className="border border-gray-300 px-1 py-0.5 text-left">対応者</th>
+                    <th className="border border-gray-300 px-1 py-0.5 text-left">対応日時</th>
+                    <th className="border border-gray-300 px-1 py-0.5 text-left w-12">時間</th>
+                    <th className="border border-gray-300 px-1 py-0.5 text-left">作業内容</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="border border-gray-300 px-1 py-0.5">山田 太郎</td>
+                    <td className="border border-gray-300 px-1 py-0.5">2024/01/15 10:00</td>
+                    <td className="border border-gray-300 px-1 py-0.5">1.0h</td>
+                    <td className="border border-gray-300 px-1 py-0.5">初期対応実施</td>
+                  </tr>
+                  <tr className="bg-gray-50">
+                    <td className="border border-gray-300 px-1 py-0.5">佐藤 花子</td>
+                    <td className="border border-gray-300 px-1 py-0.5">2024/01/15 14:00</td>
+                    <td className="border border-gray-300 px-1 py-0.5">2.0h</td>
+                    <td className="border border-gray-300 px-1 py-0.5">調査・分析</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          {/* 履歴追加エリア */}
+          <div className="border border-blue-300 rounded bg-blue-50">
+            <div className="bg-blue-100 px-2 py-1 text-xs font-semibold border-b border-blue-300">履歴追加</div>
+            <div className="p-2 grid grid-cols-4 gap-1">
+              <div className="flex items-center gap-1">
+                <span className="text-xs text-gray-500">対応者</span>
+                <div className="flex-1 border border-gray-300 rounded px-1 py-0.5 text-xs text-gray-400 bg-white">選択...</div>
+              </div>
+              <div className="flex items-center gap-1">
+                <span className="text-xs text-gray-500">対応日時</span>
+                <div className="flex-1 border border-gray-300 rounded px-1 py-0.5 text-xs text-gray-400 bg-white">日時選択</div>
+              </div>
+              <div className="flex items-center gap-1">
+                <span className="text-xs text-gray-500">対応時間</span>
+                <div className="flex-1 border border-gray-300 rounded px-1 py-0.5 text-xs text-gray-400 bg-white">1.0</div>
+              </div>
+              <div className="flex items-center gap-1">
+                <span className="text-xs text-gray-500">作業内容</span>
+                <div className="flex-1 border border-gray-300 rounded px-1 py-0.5 text-xs text-gray-400 bg-white">内容入力...</div>
+              </div>
+            </div>
+          </div>
+          {/* ボタンエリア */}
+          <div className="flex justify-end gap-2 pt-1">
+            <button className="border border-gray-300 px-3 py-1 rounded text-xs">戻る</button>
+            <button className="bg-blue-500 text-white px-3 py-1 rounded text-xs">履歴追加</button>
+            <button className="bg-green-500 text-white px-3 py-1 rounded text-xs">完了</button>
+            <button className="bg-blue-600 text-white px-3 py-1 rounded text-xs">更新</button>
+          </div>
+        </div>
+      </div>
+    </LayoutDiagram>
+  );
+}
+
 function ScreenSection({
   id,
   title,
@@ -463,6 +630,249 @@ export default function ScreenDesign() {
           </div>
         </div>
       </div>
+
+      {/* SCR004 インシデント登録 */}
+      <ScreenSection
+        id="SCR004"
+        title="インシデント登録"
+        description="新規インシデントの登録を行う。基本情報、対象情報、内容、資料を入力し保存する。"
+        api="POST /incidents"
+        tables={['incidents', 'customers', 'users']}
+        layoutDiagram={<IncidentFormLayout />}
+      >
+        <div className="space-y-3">
+          {/* 基本情報 */}
+          <div>
+            <div className="text-xs font-semibold text-gray-600 mb-1">入力項目 - 基本情報</div>
+            <InputTable items={[
+              { name: '会社名', physical: 'customer_id', type: 'BIGINT', note: '必須、選択式' },
+              { name: '件名', physical: 'title', type: 'VARCHAR', note: '必須' },
+              { name: 'ステータス', physical: 'status', type: 'VARCHAR', note: '初期値: 未対応' },
+              { name: '担当者', physical: 'user_id', type: 'BIGINT', note: '選択式' },
+              { name: '優先度', physical: 'priority', type: 'VARCHAR', note: '低/中/高/緊急' },
+              { name: '発生日', physical: 'occurred_date', type: 'DATE' },
+              { name: '登録日時', physical: 'created_at', type: 'TIMESTAMP', note: '自動設定' },
+            ]} />
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            {/* 対象情報 */}
+            <div>
+              <div className="text-xs font-semibold text-gray-600 mb-1">入力項目 - 対象情報</div>
+              <InputTable items={[
+                { name: '対象区分', physical: 'target_type', type: 'VARCHAR', note: '問合せ/障害/要望' },
+                { name: '対象名', physical: 'target_name', type: 'VARCHAR' },
+              ]} />
+            </div>
+            {/* 内容 */}
+            <div>
+              <div className="text-xs font-semibold text-gray-600 mb-1">入力項目 - 内容</div>
+              <InputTable items={[
+                { name: '内容', physical: 'content', type: 'TEXT', note: '複数行入力可' },
+                { name: '発生日時', physical: 'occurred_datetime', type: 'TIMESTAMP' },
+              ]} />
+            </div>
+          </div>
+          {/* 資料 */}
+          <div>
+            <div className="text-xs font-semibold text-gray-600 mb-1">入力項目 - 資料</div>
+            <InputTable items={[
+              { name: '添付ファイル', physical: 'attachment', type: 'FILE', note: '複数可' },
+              { name: '関連資料', physical: 'related_doc', type: 'VARCHAR' },
+              { name: '参照URL', physical: 'reference_url', type: 'VARCHAR' },
+            ]} />
+          </div>
+          {/* イベント・ボタン・遷移 */}
+          <div className="grid grid-cols-4 gap-3">
+            <div>
+              <div className="text-xs font-semibold text-gray-600 mb-1">イベント一覧</div>
+              <EventTable events={[
+                { trigger: '保存押下', success: 'データ保存→一覧へ遷移', failure: 'エラー表示' },
+                { trigger: 'クリア押下', success: '入力クリア' },
+                { trigger: '戻る押下', success: '一覧へ遷移（確認ダイアログ）' },
+              ]} />
+            </div>
+            <div>
+              <div className="text-xs font-semibold text-gray-600 mb-1">ボタン一覧</div>
+              <div className="flex flex-wrap gap-1">
+                <button className="bg-blue-600 text-white px-2 py-1 rounded text-xs">保存</button>
+                <button className="border border-gray-300 px-2 py-1 rounded text-xs">クリア</button>
+                <button className="border border-gray-300 px-2 py-1 rounded text-xs">戻る</button>
+              </div>
+            </div>
+            <div>
+              <div className="text-xs font-semibold text-gray-600 mb-1">画面遷移</div>
+              <div className="border border-gray-200 rounded p-2 bg-gray-50 text-xs space-y-1">
+                <div className="flex items-center gap-1">
+                  <span className="text-gray-500">SCR003</span>
+                  <span>→</span>
+                  <span className="text-gray-700">SCR004</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <span className="text-gray-500">保存後</span>
+                  <span>→</span>
+                  <span className="text-gray-700">SCR003</span>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div className="text-xs font-semibold text-gray-600 mb-1">権限制御</div>
+              <div className="space-y-1 text-xs">
+                <div className="flex items-center gap-1">
+                  <span className="text-green-600">●</span>
+                  <span>一般ユーザー: 利用可能</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <span className="text-green-600">●</span>
+                  <span>管理者: 利用可能</span>
+                </div>
+              </div>
+              <div className="text-xs font-semibold text-gray-600 mt-2 mb-1">エラーメッセージ</div>
+              <div className="space-y-1 text-xs">
+                <div className="bg-red-50 text-red-600 px-2 py-0.5 rounded">必須項目が入力されていません</div>
+                <div className="bg-red-50 text-red-600 px-2 py-0.5 rounded">保存に失敗しました</div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div className="text-xs font-semibold text-gray-600 mb-1">使用共通部品</div>
+            <div className="flex flex-wrap gap-1">
+              {['入力フォーム', 'セクション区切り', 'ドロップダウン選択', 'ファイルアップロード', '日付ピッカー'].map((c) => (
+                <span key={c} className="bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded text-xs">{c}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </ScreenSection>
+
+      {/* SCR005 インシデント詳細 */}
+      <ScreenSection
+        id="SCR005"
+        title="インシデント詳細"
+        description="インシデントの詳細表示・編集、対応履歴の管理を行う。情報は表示のみで、作業は対応履歴から行う。"
+        api="GET /incidents/{id}, POST /incidents/{id}/work-logs, PUT /incidents/{id}"
+        tables={['incidents', 'incident_work_logs', 'customers', 'users']}
+        layoutDiagram={<IncidentDetailLayout />}
+      >
+        <div className="space-y-3">
+          {/* 表示項目 */}
+          <div>
+            <div className="text-xs font-semibold text-gray-600 mb-1">表示項目 - インシデント情報（編集不可）</div>
+            <InputTable items={[
+              { name: '会社名', physical: 'customer_name', type: 'VARCHAR', note: '表示のみ' },
+              { name: '件名', physical: 'title', type: 'VARCHAR', note: '表示のみ' },
+              { name: 'ステータス', physical: 'status', type: 'VARCHAR', note: 'バッジ表示' },
+              { name: '担当者', physical: 'user_name', type: 'VARCHAR', note: '表示のみ' },
+              { name: '対象区分', physical: 'target_type', type: 'VARCHAR', note: '表示のみ' },
+              { name: '対象名', physical: 'target_name', type: 'VARCHAR', note: '表示のみ' },
+              { name: '内容', physical: 'content', type: 'TEXT', note: '表示のみ' },
+              { name: '発生日時', physical: 'occurred_datetime', type: 'TIMESTAMP', note: '表示のみ' },
+              { name: '登録日時', physical: 'created_at', type: 'TIMESTAMP', note: '表示のみ' },
+              { name: '更新日時', physical: 'updated_at', type: 'TIMESTAMP', note: '表示のみ' },
+            ]} />
+          </div>
+          {/* 対応履歴 */}
+          <div>
+            <div className="text-xs font-semibold text-gray-600 mb-1">対応履歴テーブル</div>
+            <table className="w-full text-xs">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="border-b border-gray-200 px-2 py-1 text-left font-semibold text-gray-700">項目名</th>
+                  <th className="border-b border-gray-200 px-2 py-1 text-left font-semibold text-gray-700 w-28">物理名</th>
+                  <th className="border-b border-gray-200 px-2 py-1 text-left font-semibold text-gray-700 w-20">型</th>
+                  <th className="border-b border-gray-200 px-2 py-1 text-left font-semibold text-gray-700">備考</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { name: '対応者', physical: 'user_name', type: 'VARCHAR', note: '作業履歴表示' },
+                  { name: '対応日時', physical: 'work_date', type: 'TIMESTAMP', note: '作業履歴表示' },
+                  { name: '対応時間', physical: 'work_time', type: 'DECIMAL', note: '時間単位' },
+                  { name: '作業内容', physical: 'work_detail', type: 'TEXT', note: '作業履歴表示' },
+                ].map((item, i) => (
+                  <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                    <td className="border-b border-gray-100 px-2 py-1">{item.name}</td>
+                    <td className="border-b border-gray-100 px-2 py-1 font-mono text-gray-600">{item.physical}</td>
+                    <td className="border-b border-gray-100 px-2 py-1 font-mono text-gray-600">{item.type}</td>
+                    <td className="border-b border-gray-100 px-2 py-1 text-gray-500">{item.note}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          {/* 履歴追加入力 */}
+          <div>
+            <div className="text-xs font-semibold text-gray-600 mb-1">履歴追加 - 入力項目</div>
+            <InputTable items={[
+              { name: '対応者', physical: 'user_id', type: 'BIGINT', note: '必須、選択式' },
+              { name: '対応日時', physical: 'work_date', type: 'TIMESTAMP', note: '必須' },
+              { name: '対応時間', physical: 'work_time', type: 'DECIMAL', note: '必須、時間単位' },
+              { name: '作業内容', physical: 'work_detail', type: 'TEXT', note: '必須、複数行' },
+            ]} />
+          </div>
+          {/* イベント・ボタン・遷移 */}
+          <div className="grid grid-cols-4 gap-3">
+            <div>
+              <div className="text-xs font-semibold text-gray-600 mb-1">イベント一覧</div>
+              <EventTable events={[
+                { trigger: '更新押下', success: '情報更新', failure: 'エラー表示' },
+                { trigger: '履歴追加押下', success: '履歴保存→画面更新', failure: 'エラー表示' },
+                { trigger: '完了押下', success: 'ステータス完了へ変更（確認ダイアログ）' },
+                { trigger: '戻る押下', success: '一覧へ遷移' },
+              ]} />
+            </div>
+            <div>
+              <div className="text-xs font-semibold text-gray-600 mb-1">ボタン一覧</div>
+              <div className="flex flex-wrap gap-1">
+                <button className="bg-blue-600 text-white px-2 py-1 rounded text-xs">更新</button>
+                <button className="bg-blue-500 text-white px-2 py-1 rounded text-xs">履歴追加</button>
+                <button className="bg-green-500 text-white px-2 py-1 rounded text-xs">完了</button>
+                <button className="border border-gray-300 px-2 py-1 rounded text-xs">戻る</button>
+              </div>
+            </div>
+            <div>
+              <div className="text-xs font-semibold text-gray-600 mb-1">画面遷移</div>
+              <div className="border border-gray-200 rounded p-2 bg-gray-50 text-xs space-y-1">
+                <div className="flex items-center gap-1">
+                  <span className="text-gray-500">SCR003</span>
+                  <span>-&gt;</span>
+                  <span className="text-gray-700">SCR005（詳細）</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <span className="text-gray-500">完了後</span>
+                  <span>-&gt;</span>
+                  <span className="text-gray-700">SCR003</span>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div className="text-xs font-semibold text-gray-600 mb-1">権限制御</div>
+              <div className="space-y-1 text-xs">
+                <div className="flex items-center gap-1">
+                  <span className="text-green-600">●</span>
+                  <span>一般ユーザー: 利用可能</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <span className="text-green-600">●</span>
+                  <span>管理者: 利用可能</span>
+                </div>
+              </div>
+              <div className="text-xs font-semibold text-gray-600 mt-2 mb-1">エラーメッセージ</div>
+              <div className="space-y-1 text-xs">
+                <div className="bg-red-50 text-red-600 px-2 py-0.5 rounded">履歴の追加に失敗しました</div>
+                <div className="bg-red-50 text-red-600 px-2 py-0.5 rounded">必須項目が未入力です</div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div className="text-xs font-semibold text-gray-600 mb-1">使用共通部品</div>
+            <div className="flex flex-wrap gap-1">
+              {['詳細表示パネル', 'Bootstrap テーブル', 'ステータスバッジ', '入力フォーム', '確認ダイアログ', '日時ピッカー'].map((c) => (
+                <span key={c} className="bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded text-xs">{c}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </ScreenSection>
     </div>
   );
 }
