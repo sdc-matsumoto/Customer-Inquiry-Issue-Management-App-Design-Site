@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FileText, Settings, Users, LayoutGrid, GitBranch, BookOpen, Database, Code, CheckSquare, Palette, Monitor } from 'lucide-react';
+import { FileText, Settings, Users, LayoutGrid, GitBranch, BookOpen, Database, Code, CheckSquare, Palette, Monitor, Smartphone } from 'lucide-react';
 import SystemOverview from './components/SystemOverview';
 import BusinessFlow from './components/BusinessFlow';
 import PermissionDesign from './components/PermissionDesign';
@@ -10,6 +10,7 @@ import ApiDesign from './components/ApiDesign';
 import ValidationDesign from './components/ValidationDesign';
 import CommonComponents from './components/CommonComponents';
 import ScreenDesign from './components/ScreenDesign';
+import MockDesign from './components/MockDesign';
 
 const menuItems = [
   { id: '01', title: 'システム概要', icon: BookOpen },
@@ -22,6 +23,7 @@ const menuItems = [
   { id: '08', title: 'バリデーション設計', icon: CheckSquare },
   { id: '09', title: '共通部品設計', icon: Palette },
   { id: '10', title: '画面設計', icon: Monitor },
+  { id: '11', title: 'モック', icon: Smartphone },
 ];
 
 function App() {
@@ -49,6 +51,8 @@ function App() {
         return <CommonComponents />;
       case '10':
         return <ScreenDesign />;
+      case '11':
+        return <MockDesign />;
       default:
         return <SystemOverview />;
     }

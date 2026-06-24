@@ -46,6 +46,33 @@ function EventTable({ events }: { events: { trigger: string; success: string; fa
   );
 }
 
+function FormInputTable({ items }: { items: { name: string; physical: string; type: string; required: boolean }[] }) {
+  return (
+    <table className="w-full text-xs">
+      <thead className="bg-gray-50">
+        <tr>
+          <th className="border-b border-gray-200 px-2 py-1 text-left font-semibold text-gray-700">項目名</th>
+          <th className="border-b border-gray-200 px-2 py-1 text-left font-semibold text-gray-700 w-28">物理名</th>
+          <th className="border-b border-gray-200 px-2 py-1 text-left font-semibold text-gray-700 w-20">型</th>
+          <th className="border-b border-gray-200 px-2 py-1 text-center font-semibold text-gray-700 w-10">必須</th>
+        </tr>
+      </thead>
+      <tbody>
+        {items.map((item, i) => (
+          <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+            <td className="border-b border-gray-100 px-2 py-1">{item.name}</td>
+            <td className="border-b border-gray-100 px-2 py-1 font-mono text-gray-600">{item.physical}</td>
+            <td className="border-b border-gray-100 px-2 py-1 font-mono text-gray-600">{item.type}</td>
+            <td className="border-b border-gray-100 px-2 py-1 text-center">
+              {item.required ? <span className="text-red-500 font-bold">○</span> : ''}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+
 function LayoutDiagram({ children, title }: { children: React.ReactNode; title: string }) {
   return (
     <div className="border border-gray-300 rounded p-2 bg-gray-50">
@@ -173,173 +200,6 @@ function IncidentListLayout() {
                 </button>
               ))}
             </div>
-          </div>
-        </div>
-      </div>
-    </LayoutDiagram>
-  );
-}
-
-// SCR004 Incident Form Layout
-function IncidentFormLayout() {
-  return (
-    <LayoutDiagram title="画面構成図">
-      <div className="border border-gray-400 rounded bg-white overflow-hidden">
-        <div className="bg-gray-700 text-white text-xs text-center py-1">ヘッダー</div>
-        <div className="p-2 space-y-2">
-          {/* 基本情報セクション */}
-          <div className="border border-gray-300 rounded">
-            <div className="bg-gray-100 px-2 py-1 text-xs font-semibold border-b border-gray-300">基本情報</div>
-            <div className="p-2 grid grid-cols-2 gap-1">
-              <div className="flex items-center gap-1">
-                <span className="text-xs text-gray-500 w-16">会社名</span>
-                <div className="flex-1 border border-gray-300 rounded px-1 py-0.5 text-xs text-gray-400">株式会社サンプル</div>
-              </div>
-              <div className="flex items-center gap-1">
-                <span className="text-xs text-gray-500 w-16">件名</span>
-                <div className="flex-1 border border-gray-300 rounded px-1 py-0.5 text-xs text-gray-400">インシデント件名</div>
-              </div>
-              <div className="flex items-center gap-1">
-                <span className="text-xs text-gray-500 w-16">ステータス</span>
-                <div className="flex-1 border border-gray-300 rounded px-1 py-0.5 text-xs text-gray-400 bg-gray-50">未対応</div>
-              </div>
-              <div className="flex items-center gap-1">
-                <span className="text-xs text-gray-500 w-16">担当者</span>
-                <div className="flex-1 border border-gray-300 rounded px-1 py-0.5 text-xs text-gray-400 bg-gray-50">山田 太郎</div>
-              </div>
-            </div>
-          </div>
-          {/* 対象情報セクション */}
-          <div className="border border-gray-300 rounded">
-            <div className="bg-gray-100 px-2 py-1 text-xs font-semibold border-b border-gray-300">対象情報</div>
-            <div className="p-2 grid grid-cols-2 gap-1">
-              <div className="flex items-center gap-1">
-                <span className="text-xs text-gray-500 w-16">対象区分</span>
-                <div className="flex-1 border border-gray-300 rounded px-1 py-0.5 text-xs text-gray-400 bg-gray-50">問合せ</div>
-              </div>
-              <div className="flex items-center gap-1">
-                <span className="text-xs text-gray-500 w-16">対象名</span>
-                <div className="flex-1 border border-gray-300 rounded px-1 py-0.5 text-xs text-gray-400">対象システム名</div>
-              </div>
-            </div>
-          </div>
-          {/* 内容セクション */}
-          <div className="border border-gray-300 rounded">
-            <div className="bg-gray-100 px-2 py-1 text-xs font-semibold border-b border-gray-300">内容</div>
-            <div className="p-2 space-y-1">
-              <div className="flex items-start gap-1">
-                <span className="text-xs text-gray-500 w-16">内容</span>
-                <div className="flex-1 border border-gray-300 rounded px-1 py-0.5 text-xs text-gray-400 h-8">問合せ内容...</div>
-              </div>
-              <div className="flex items-center gap-1">
-                <span className="text-xs text-gray-500 w-16">発生日</span>
-                <div className="flex-1 border border-gray-300 rounded px-1 py-0.5 text-xs text-gray-400">2024/01/15</div>
-              </div>
-            </div>
-          </div>
-          {/* 資料セクション */}
-          <div className="border border-gray-300 rounded">
-            <div className="bg-gray-100 px-2 py-1 text-xs font-semibold border-b border-gray-300">資料</div>
-            <div className="p-2 space-y-1">
-              <div className="flex items-center gap-1">
-                <span className="text-xs text-gray-500 w-16">添付ファイル</span>
-                <button className="border border-gray-300 rounded px-2 py-0.5 text-xs text-gray-600">ファイル選択</button>
-              </div>
-              <div className="text-xs text-gray-400 px-16">選択されていません</div>
-            </div>
-          </div>
-          {/* ボタンエリア */}
-          <div className="flex justify-end gap-2 pt-1">
-            <button className="border border-gray-300 px-3 py-1 rounded text-xs">戻る</button>
-            <button className="border border-gray-300 px-3 py-1 rounded text-xs">クリア</button>
-            <button className="bg-blue-600 text-white px-3 py-1 rounded text-xs">保存</button>
-          </div>
-        </div>
-      </div>
-    </LayoutDiagram>
-  );
-}
-
-// SCR005 Incident Detail Layout
-function IncidentDetailLayout() {
-  return (
-    <LayoutDiagram title="画面構成図">
-      <div className="border border-gray-400 rounded bg-white overflow-hidden">
-        <div className="bg-gray-700 text-white text-xs text-center py-1">ヘッダー</div>
-        <div className="p-2 space-y-2">
-          {/* インシデント情報（表示のみ） */}
-          <div className="border border-gray-300 rounded">
-            <div className="bg-gray-100 px-2 py-1 text-xs font-semibold border-b border-gray-300 flex justify-between">
-              <span>インシデント情報</span>
-              <span className="text-gray-500">表示のみ</span>
-            </div>
-            <div className="p-2 grid grid-cols-3 gap-1 text-xs">
-              <div><span className="text-gray-500">会社名:</span> 株式会社サンプル</div>
-              <div><span className="text-gray-500">件名:</span> インシデント件名</div>
-              <div><span className="text-gray-500">ステータス:</span> <span className="bg-blue-100 text-blue-700 px-1 rounded">対応中</span></div>
-              <div><span className="text-gray-500">担当者:</span> 山田 太郎</div>
-              <div><span className="text-gray-500">対象区分:</span> 問合せ</div>
-              <div><span className="text-gray-500">対象名:</span> 対象システム</div>
-            </div>
-          </div>
-          {/* 対応履歴テーブル */}
-          <div className="border border-gray-300 rounded">
-            <div className="bg-gray-100 px-2 py-1 text-xs font-semibold border-b border-gray-300">対応履歴</div>
-            <div className="p-2">
-              <table className="w-full text-xs border-collapse">
-                <thead>
-                  <tr className="bg-gray-50">
-                    <th className="border border-gray-300 px-1 py-0.5 text-left">対応者</th>
-                    <th className="border border-gray-300 px-1 py-0.5 text-left">対応日時</th>
-                    <th className="border border-gray-300 px-1 py-0.5 text-left w-12">時間</th>
-                    <th className="border border-gray-300 px-1 py-0.5 text-left">作業内容</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className="border border-gray-300 px-1 py-0.5">山田 太郎</td>
-                    <td className="border border-gray-300 px-1 py-0.5">2024/01/15 10:00</td>
-                    <td className="border border-gray-300 px-1 py-0.5">1.0h</td>
-                    <td className="border border-gray-300 px-1 py-0.5">初期対応実施</td>
-                  </tr>
-                  <tr className="bg-gray-50">
-                    <td className="border border-gray-300 px-1 py-0.5">佐藤 花子</td>
-                    <td className="border border-gray-300 px-1 py-0.5">2024/01/15 14:00</td>
-                    <td className="border border-gray-300 px-1 py-0.5">2.0h</td>
-                    <td className="border border-gray-300 px-1 py-0.5">調査・分析</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          {/* 履歴追加エリア */}
-          <div className="border border-blue-300 rounded bg-blue-50">
-            <div className="bg-blue-100 px-2 py-1 text-xs font-semibold border-b border-blue-300">履歴追加</div>
-            <div className="p-2 grid grid-cols-4 gap-1">
-              <div className="flex items-center gap-1">
-                <span className="text-xs text-gray-500">対応者</span>
-                <div className="flex-1 border border-gray-300 rounded px-1 py-0.5 text-xs text-gray-400 bg-white">選択...</div>
-              </div>
-              <div className="flex items-center gap-1">
-                <span className="text-xs text-gray-500">対応日時</span>
-                <div className="flex-1 border border-gray-300 rounded px-1 py-0.5 text-xs text-gray-400 bg-white">日時選択</div>
-              </div>
-              <div className="flex items-center gap-1">
-                <span className="text-xs text-gray-500">対応時間</span>
-                <div className="flex-1 border border-gray-300 rounded px-1 py-0.5 text-xs text-gray-400 bg-white">1.0</div>
-              </div>
-              <div className="flex items-center gap-1">
-                <span className="text-xs text-gray-500">作業内容</span>
-                <div className="flex-1 border border-gray-300 rounded px-1 py-0.5 text-xs text-gray-400 bg-white">内容入力...</div>
-              </div>
-            </div>
-          </div>
-          {/* ボタンエリア */}
-          <div className="flex justify-end gap-2 pt-1">
-            <button className="border border-gray-300 px-3 py-1 rounded text-xs">戻る</button>
-            <button className="bg-blue-500 text-white px-3 py-1 rounded text-xs">履歴追加</button>
-            <button className="bg-green-500 text-white px-3 py-1 rounded text-xs">完了</button>
-            <button className="bg-blue-600 text-white px-3 py-1 rounded text-xs">更新</button>
           </div>
         </div>
       </div>
@@ -538,6 +398,8 @@ export default function ScreenDesign() {
               <div className="text-xs font-semibold text-gray-600 mb-1">入力項目一覧</div>
               <InputTable items={[
                 { name: '顧客名', physical: 'customer_name', type: 'VARCHAR', note: '部分一致' },
+                { name: 'タイトル', physical: 'title', type: 'VARCHAR', note: '部分一致' },
+                { name: '問合せ内容', physical: 'inquiry_detail', type: 'TEXT', note: '部分一致' },
                 { name: 'ステータス', physical: 'status', type: 'VARCHAR' },
                 { name: '担当者', physical: 'user_id', type: 'BIGINT' },
                 { name: '対象区分', physical: 'target_type', type: 'VARCHAR' },
@@ -631,243 +493,541 @@ export default function ScreenDesign() {
         </div>
       </div>
 
-      {/* SCR004 インシデント登録 */}
+      {/* SCR004 Incident Registration */}
       <ScreenSection
         id="SCR004"
         title="インシデント登録"
-        description="新規インシデントの登録を行う。基本情報、対象情報、内容、資料を入力し保存する。"
+        description="顧客からの問合せおよび障害情報を登録する。登録後は自動的に一覧へ遷移する。"
         api="POST /incidents"
         tables={['incidents', 'customers', 'users']}
-        layoutDiagram={<IncidentFormLayout />}
+        layoutDiagram={
+          <LayoutDiagram title="画面構成図">
+            <div className="border border-gray-400 rounded bg-white overflow-hidden">
+              <div className="bg-gray-700 text-white text-xs text-center py-1">ヘッダー</div>
+              <div className="p-2 space-y-2">
+                <div className="border border-gray-200 rounded p-2 bg-gray-50">
+                  <div className="text-xs font-semibold text-gray-600">基本情報</div>
+                </div>
+                <div className="border border-gray-200 rounded p-2 bg-gray-50">
+                  <div className="text-xs font-semibold text-gray-600">対象情報</div>
+                </div>
+                <div className="border border-gray-200 rounded p-2 bg-gray-50">
+                  <div className="text-xs font-semibold text-gray-600">内容</div>
+                </div>
+                <div className="border border-gray-200 rounded p-2 bg-gray-50">
+                  <div className="text-xs font-semibold text-gray-600">資料</div>
+                </div>
+                <div className="border border-gray-200 rounded p-2 bg-blue-50">
+                  <div className="text-xs font-semibold text-blue-700">
+                    ステータス：未対応（初期値）
+                  </div>
+                </div>
+                <div className="flex gap-1 pt-1">
+                  <button className="bg-blue-600 text-white px-3 py-1 rounded text-xs">
+                    登録
+                  </button>
+                  <button className="border border-gray-300 px-3 py-1 rounded text-xs">
+                    クリア
+                  </button>
+                  <button className="bg-gray-200 text-gray-700 px-3 py-1 rounded text-xs">
+                    一覧へ戻る
+                  </button>
+                </div>
+              </div>
+            </div>
+          </LayoutDiagram>
+        }
       >
-        <div className="space-y-3">
-          {/* 基本情報 */}
+        <div className="grid grid-cols-2 gap-3 mb-3">
           <div>
-            <div className="text-xs font-semibold text-gray-600 mb-1">入力項目 - 基本情報</div>
-            <InputTable items={[
-              { name: '会社名', physical: 'customer_id', type: 'BIGINT', note: '必須、選択式' },
-              { name: '件名', physical: 'title', type: 'VARCHAR', note: '必須' },
-              { name: 'ステータス', physical: 'status', type: 'VARCHAR', note: '初期値: 未対応' },
-              { name: '担当者', physical: 'user_id', type: 'BIGINT', note: '選択式' },
-              { name: '優先度', physical: 'priority', type: 'VARCHAR', note: '低/中/高/緊急' },
-              { name: '発生日', physical: 'occurred_date', type: 'DATE' },
-              { name: '登録日時', physical: 'created_at', type: 'TIMESTAMP', note: '自動設定' },
+            <div className="text-xs font-semibold text-gray-600 mb-1">基本情報</div>
+            <FormInputTable items={[
+              { name: '区分', physical: 'incident_type', type: 'VARCHAR', required: true },
+              { name: '顧客', physical: 'customer_id', type: 'BIGINT', required: true },
+              { name: '顧客担当者', physical: 'customer_contact_name', type: 'VARCHAR', required: false },
+              { name: 'タイトル', physical: 'title', type: 'VARCHAR', required: true },
+              { name: '発生日', physical: 'occurred_at', type: 'DATE', required: true },
+              { name: '対応開始日', physical: 'started_at', type: 'DATE', required: false },
+              { name: '対応終了日', physical: 'closed_at', type: 'DATE', required: false },
             ]} />
           </div>
-          <div className="grid grid-cols-2 gap-3">
-            {/* 対象情報 */}
-            <div>
-              <div className="text-xs font-semibold text-gray-600 mb-1">入力項目 - 対象情報</div>
-              <InputTable items={[
-                { name: '対象区分', physical: 'target_type', type: 'VARCHAR', note: '問合せ/障害/要望' },
-                { name: '対象名', physical: 'target_name', type: 'VARCHAR' },
-              ]} />
-            </div>
-            {/* 内容 */}
-            <div>
-              <div className="text-xs font-semibold text-gray-600 mb-1">入力項目 - 内容</div>
-              <InputTable items={[
-                { name: '内容', physical: 'content', type: 'TEXT', note: '複数行入力可' },
-                { name: '発生日時', physical: 'occurred_datetime', type: 'TIMESTAMP' },
-              ]} />
-            </div>
-          </div>
-          {/* 資料 */}
           <div>
-            <div className="text-xs font-semibold text-gray-600 mb-1">入力項目 - 資料</div>
-            <InputTable items={[
-              { name: '添付ファイル', physical: 'attachment', type: 'FILE', note: '複数可' },
-              { name: '関連資料', physical: 'related_doc', type: 'VARCHAR' },
-              { name: '参照URL', physical: 'reference_url', type: 'VARCHAR' },
+            <div className="text-xs font-semibold text-gray-600 mb-1">対象情報</div>
+            <FormInputTable items={[
+              { name: '対象区分', physical: 'target_type', type: 'VARCHAR', required: false },
+              { name: '対象名', physical: 'target_name', type: 'VARCHAR', required: false },
             ]} />
           </div>
-          {/* イベント・ボタン・遷移 */}
-          <div className="grid grid-cols-4 gap-3">
-            <div>
-              <div className="text-xs font-semibold text-gray-600 mb-1">イベント一覧</div>
-              <EventTable events={[
-                { trigger: '保存押下', success: 'データ保存→一覧へ遷移', failure: 'エラー表示' },
-                { trigger: 'クリア押下', success: '入力クリア' },
-                { trigger: '戻る押下', success: '一覧へ遷移（確認ダイアログ）' },
-              ]} />
-            </div>
-            <div>
-              <div className="text-xs font-semibold text-gray-600 mb-1">ボタン一覧</div>
-              <div className="flex flex-wrap gap-1">
-                <button className="bg-blue-600 text-white px-2 py-1 rounded text-xs">保存</button>
-                <button className="border border-gray-300 px-2 py-1 rounded text-xs">クリア</button>
-                <button className="border border-gray-300 px-2 py-1 rounded text-xs">戻る</button>
-              </div>
-            </div>
-            <div>
-              <div className="text-xs font-semibold text-gray-600 mb-1">画面遷移</div>
-              <div className="border border-gray-200 rounded p-2 bg-gray-50 text-xs space-y-1">
-                <div className="flex items-center gap-1">
-                  <span className="text-gray-500">SCR003</span>
-                  <span>→</span>
-                  <span className="text-gray-700">SCR004</span>
-                </div>
-                <div className="flex items-center gap-1">
-                  <span className="text-gray-500">保存後</span>
-                  <span>→</span>
-                  <span className="text-gray-700">SCR003</span>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div className="text-xs font-semibold text-gray-600 mb-1">権限制御</div>
-              <div className="space-y-1 text-xs">
-                <div className="flex items-center gap-1">
-                  <span className="text-green-600">●</span>
-                  <span>一般ユーザー: 利用可能</span>
-                </div>
-                <div className="flex items-center gap-1">
-                  <span className="text-green-600">●</span>
-                  <span>管理者: 利用可能</span>
-                </div>
-              </div>
-              <div className="text-xs font-semibold text-gray-600 mt-2 mb-1">エラーメッセージ</div>
-              <div className="space-y-1 text-xs">
-                <div className="bg-red-50 text-red-600 px-2 py-0.5 rounded">必須項目が入力されていません</div>
-                <div className="bg-red-50 text-red-600 px-2 py-0.5 rounded">保存に失敗しました</div>
-              </div>
+        </div>
+        <div className="grid grid-cols-2 gap-3 mb-3">
+          <div>
+            <div className="text-xs font-semibold text-gray-600 mb-1">内容</div>
+            <FormInputTable items={[
+              { name: '問合せ内容', physical: 'inquiry_detail', type: 'TEXT', required: true },
+              { name: '対応内容', physical: 'response_detail', type: 'TEXT', required: false },
+            ]} />
+          </div>
+          <div>
+            <div className="text-xs font-semibold text-gray-600 mb-1">資料</div>
+            <FormInputTable items={[
+              { name: '資料保存先パス1', physical: 'document_path1', type: 'VARCHAR', required: false },
+              { name: '資料保存先パス2', physical: 'document_path2', type: 'VARCHAR', required: false },
+              { name: '資料保存先パス3', physical: 'document_path3', type: 'VARCHAR', required: false },
+            ]} />
+          </div>
+        </div>
+        <div className="grid grid-cols-4 gap-3">
+          <div>
+            <div className="text-xs font-semibold text-gray-600 mb-1">ボタン一覧</div>
+            <div className="space-y-1">
+              <button className="w-full bg-blue-600 text-white py-1.5 rounded text-xs">登録</button>
+              <button className="w-full border border-gray-300 py-1.5 rounded text-xs">クリア</button>
+              <button className="w-full bg-gray-200 text-gray-700 py-1.5 rounded text-xs">一覧へ戻る</button>
             </div>
           </div>
           <div>
-            <div className="text-xs font-semibold text-gray-600 mb-1">使用共通部品</div>
-            <div className="flex flex-wrap gap-1">
-              {['入力フォーム', 'セクション区切り', 'ドロップダウン選択', 'ファイルアップロード', '日付ピッカー'].map((c) => (
-                <span key={c} className="bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded text-xs">{c}</span>
+            <div className="text-xs font-semibold text-gray-600 mb-1">イベント一覧</div>
+            <EventTable events={[
+              { trigger: '登録', success: 'SCR003へ遷移（一覧）', failure: 'エラー表示' },
+              { trigger: 'クリア', success: '入力初期化' },
+              { trigger: '戻る', success: 'SCR003へ遷移' },
+            ]} />
+          </div>
+          <div>
+            <div className="text-xs font-semibold text-gray-600 mb-1">エラーメッセージ</div>
+            <div className="space-y-1">
+              {[
+                '顧客を選択してください',
+                'タイトルを入力してください',
+                '問合せ内容を入力してください',
+                '登録に失敗しました'
+              ].map((e) => (
+                <div key={e} className="bg-red-50 text-red-600 px-2 py-0.5 rounded text-xs">{e}</div>
+              ))}
+            </div>
+          </div>
+          <div>
+            <div className="text-xs font-semibold text-gray-600 mb-1">補足</div>
+            <div className="text-xs text-gray-500">
+              登録時ステータスは「未対応」で固定
+            </div>
+          </div>
+        </div>
+      </ScreenSection>
+
+      {/* SCR005 Incident Detail */}
+      <ScreenSection
+        id="SCR005"
+        title="インシデント詳細"
+        description="インシデントの閲覧・更新・対応履歴管理を行う。ステータス変更・履歴追加が主要機能。"
+        api="GET/PUT/PATCH /incidents/*"
+        tables={['incidents', 'incident_work_logs', 'customers', 'users']}
+        layoutDiagram={
+          <LayoutDiagram title="画面構成図">
+            <div className="border border-gray-400 rounded bg-white overflow-hidden">
+              <div className="bg-gray-700 text-white text-xs text-center py-1">ヘッダー</div>
+              <div className="p-2 space-y-1.5 text-xs">
+                <div className="border border-gray-200 rounded p-1.5 bg-gray-50">
+                  <span className="font-semibold">基本情報（編集可）</span>
+                </div>
+                <div className="border border-gray-200 rounded p-1.5 bg-gray-50">
+                  <span className="font-semibold">ステータス更新</span>
+                </div>
+                <div className="border border-gray-200 rounded p-1.5 bg-gray-50">
+                  <span className="font-semibold">対象情報</span>
+                </div>
+                <div className="border border-gray-200 rounded p-1.5 bg-gray-50">
+                  <span className="font-semibold">内容</span>
+                </div>
+                <div className="border border-gray-200 rounded p-1.5 bg-gray-50">
+                  <span className="font-semibold">資料</span>
+                </div>
+                <div className="border border-blue-300 rounded p-1.5 bg-blue-50">
+                  <span className="font-semibold text-blue-700">対応履歴</span>
+                </div>
+                <div className="flex gap-1">
+                  <button className="bg-blue-600 text-white px-2 py-0.5 rounded">更新</button>
+                  <button className="bg-green-600 text-white px-2 py-0.5 rounded">履歴追加</button>
+                  <button className="bg-orange-500 text-white px-2 py-0.5 rounded">完了</button>
+                  <button className="bg-gray-200 text-gray-700 px-2 py-0.5 rounded">一覧へ戻る</button>
+                </div>
+              </div>
+            </div>
+          </LayoutDiagram>
+        }
+      >
+        <div className="grid grid-cols-3 gap-3 mb-3">
+          <div>
+            <div className="text-xs font-semibold text-gray-600 mb-1">基本情報（編集対象）</div>
+            <table className="w-full text-xs">
+              <tbody>
+                {[
+                  '区分',
+                  '顧客',
+                  '顧客担当者',
+                  'タイトル',
+                  '発生日',
+                  '対応開始日',
+                  '対応終了日'
+                ].map((item, i) => (
+                  <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                    <td className="px-2 py-1">{item}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <div className="mt-2 p-2 bg-yellow-50 text-xs text-yellow-700 rounded">
+              ステータスは別ブロックで更新
+            </div>
+          </div>
+          <div>
+            <div className="text-xs font-semibold text-gray-600 mb-1">対応履歴（コア機能）</div>
+            <table className="w-full text-xs border">
+              <thead className="bg-gray-100">
+                <tr>
+                  <th className="px-2 py-1 text-left">対応者</th>
+                  <th className="px-2 py-1 text-left">日時</th>
+                  <th className="px-2 py-1 text-center">時間</th>
+                  <th className="px-2 py-1 text-left">作業内容</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="bg-gray-50">
+                  <td className="px-2 py-1 text-gray-400">-</td>
+                  <td className="px-2 py-1 text-gray-400">-</td>
+                  <td className="px-2 py-1 text-gray-400">-</td>
+                  <td className="px-2 py-1 text-gray-400">-</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <div className="text-xs font-semibold text-gray-600 mb-1">履歴追加フォーム</div>
+            <FormInputTable items={[
+              { name: '対応者', physical: 'user_id', type: 'BIGINT', required: true },
+              { name: '対応日時', physical: 'work_date', type: 'DATETIME', required: true },
+              { name: '対応時間', physical: 'work_time', type: 'DECIMAL', required: true },
+              { name: '作業内容', physical: 'work_detail', type: 'TEXT', required: true },
+            ]} />
+            <div className="mt-2 text-xs text-gray-500">
+              ※履歴追加は即時反映（Ajax想定）
+            </div>
+          </div>
+        </div>
+        <div className="grid grid-cols-4 gap-3">
+          <div>
+            <div className="text-xs font-semibold text-gray-600 mb-1">ボタン一覧</div>
+            <div className="space-y-1">
+              <button className="w-full bg-blue-600 text-white py-1 rounded text-xs">更新</button>
+              <button className="w-full bg-green-600 text-white py-1 rounded text-xs">履歴追加</button>
+              <button className="w-full bg-orange-500 text-white py-1 rounded text-xs">完了</button>
+              <button className="w-full bg-gray-200 text-gray-700 py-1 rounded text-xs">一覧へ戻る</button>
+            </div>
+          </div>
+          <div>
+            <div className="text-xs font-semibold text-gray-600 mb-1">イベント一覧</div>
+            <EventTable events={[
+              { trigger: '更新', success: 'インシデント更新' },
+              { trigger: '履歴追加', success: '履歴登録→一覧更新' },
+              { trigger: '完了', success: 'ステータス完了へ更新' },
+              { trigger: '戻る', success: 'SCR003へ戻る' },
+            ]} />
+          </div>
+          <div>
+            <div className="text-xs font-semibold text-gray-600 mb-1">補足</div>
+            <div className="text-xs text-gray-600 space-y-1">
+              <div>・ステータス変更は履歴と連動</div>
+              <div>・完了時は編集制限あり</div>
+              <div>・履歴が最も重要データ</div>
+            </div>
+          </div>
+          <div>
+            <div className="text-xs font-semibold text-gray-600 mb-1">エラー</div>
+            <div className="space-y-1">
+              {['更新失敗', '履歴登録失敗', 'ステータス更新失敗'].map((e) => (
+                <div key={e} className="bg-red-50 text-red-600 px-2 py-0.5 rounded text-xs">{e}</div>
               ))}
             </div>
           </div>
         </div>
       </ScreenSection>
 
-      {/* SCR005 インシデント詳細 */}
+      {/* SCR006 User Master */}
       <ScreenSection
-        id="SCR005"
-        title="インシデント詳細"
-        description="インシデントの詳細表示・編集、対応履歴の管理を行う。情報は表示のみで、作業は対応履歴から行う。"
-        api="GET /incidents/{id}, POST /incidents/{id}/work-logs, PUT /incidents/{id}"
-        tables={['incidents', 'incident_work_logs', 'customers', 'users']}
-        layoutDiagram={<IncidentDetailLayout />}
+        id="SCR006"
+        title="ユーザーマスタ"
+        description="システム利用者を管理する。管理者のみ利用可能。"
+        api="GET/POST/PUT /users"
+        tables={['users']}
+        layoutDiagram={
+          <LayoutDiagram title="画面構成図">
+            <div className="border border-gray-400 rounded bg-white overflow-hidden">
+              <div className="bg-gray-700 text-white text-xs text-center py-1">ヘッダー</div>
+              <div className="p-2">
+                <div className="border border-gray-200 rounded p-1.5 bg-gray-50 mb-2">
+                  <span className="text-xs font-semibold">検索条件</span>
+                  <div className="flex gap-1 mt-1">
+                    <input className="border border-gray-300 rounded px-1 py-0.5 text-xs w-16" placeholder="ログインID" />
+                    <input className="border border-gray-300 rounded px-1 py-0.5 text-xs w-16" placeholder="ユーザー名" />
+                    <select className="border border-gray-300 rounded px-1 py-0.5 text-xs w-14">
+                      <option>管理者</option>
+                    </select>
+                    <button className="bg-blue-600 text-white px-2 py-0.5 rounded text-xs">検索</button>
+                  </div>
+                </div>
+                <div className="text-right mb-1">
+                  <button className="bg-blue-600 text-white px-2 py-0.5 rounded text-xs">新規登録</button>
+                </div>
+                <table className="w-full text-xs border border-gray-200 mb-2">
+                  <thead className="bg-gray-100">
+                    <tr>
+                      <th className="border-b px-1 py-0.5">ログインID</th>
+                      <th className="border-b px-1 py-0.5">ユーザー名</th>
+                      <th className="border-b px-1 py-0.5">管理者</th>
+                      <th className="border-b px-1 py-0.5">作成日時</th>
+                      <th className="border-b px-1 py-0.5">操作</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="bg-gray-50">
+                      <td className="border-b px-1 py-0.5">admin</td>
+                      <td className="border-b px-1 py-0.5">管理者</td>
+                      <td className="border-b px-1 py-0.5 text-center">○</td>
+                      <td className="border-b px-1 py-0.5">2024/01/01</td>
+                      <td className="border-b px-1 py-0.5">
+                        <button className="text-blue-600 text-xs">編集</button>
+                        <button className="text-red-600 text-xs ml-1">削除</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div className="flex justify-center gap-0.5">
+                  {['1', '2', '3'].map((p) => (
+                    <button key={p} className={`px-2 py-0.5 rounded text-xs ${p === '1' ? 'bg-blue-500 text-white' : 'border'}`}>{p}</button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </LayoutDiagram>
+        }
       >
-        <div className="space-y-3">
-          {/* 表示項目 */}
+        <div className="grid grid-cols-3 gap-3 mb-3">
           <div>
-            <div className="text-xs font-semibold text-gray-600 mb-1">表示項目 - インシデント情報（編集不可）</div>
-            <InputTable items={[
-              { name: '会社名', physical: 'customer_name', type: 'VARCHAR', note: '表示のみ' },
-              { name: '件名', physical: 'title', type: 'VARCHAR', note: '表示のみ' },
-              { name: 'ステータス', physical: 'status', type: 'VARCHAR', note: 'バッジ表示' },
-              { name: '担当者', physical: 'user_name', type: 'VARCHAR', note: '表示のみ' },
-              { name: '対象区分', physical: 'target_type', type: 'VARCHAR', note: '表示のみ' },
-              { name: '対象名', physical: 'target_name', type: 'VARCHAR', note: '表示のみ' },
-              { name: '内容', physical: 'content', type: 'TEXT', note: '表示のみ' },
-              { name: '発生日時', physical: 'occurred_datetime', type: 'TIMESTAMP', note: '表示のみ' },
-              { name: '登録日時', physical: 'created_at', type: 'TIMESTAMP', note: '表示のみ' },
-              { name: '更新日時', physical: 'updated_at', type: 'TIMESTAMP', note: '表示のみ' },
+            <div className="text-xs font-semibold text-gray-600 mb-1">検索条件</div>
+            <FormInputTable items={[
+              { name: 'ログインID', physical: 'login_id', type: 'VARCHAR', required: false },
+              { name: 'ユーザー名', physical: 'user_name', type: 'VARCHAR', required: false },
+              { name: '管理者区分', physical: 'is_admin', type: 'BOOLEAN', required: false },
             ]} />
           </div>
-          {/* 対応履歴 */}
           <div>
-            <div className="text-xs font-semibold text-gray-600 mb-1">対応履歴テーブル</div>
-            <table className="w-full text-xs">
-              <thead className="bg-gray-50">
+            <div className="text-xs font-semibold text-gray-600 mb-1">一覧テーブル</div>
+            <table className="w-full text-xs border border-gray-200">
+              <thead className="bg-gray-100">
                 <tr>
-                  <th className="border-b border-gray-200 px-2 py-1 text-left font-semibold text-gray-700">項目名</th>
-                  <th className="border-b border-gray-200 px-2 py-1 text-left font-semibold text-gray-700 w-28">物理名</th>
-                  <th className="border-b border-gray-200 px-2 py-1 text-left font-semibold text-gray-700 w-20">型</th>
-                  <th className="border-b border-gray-200 px-2 py-1 text-left font-semibold text-gray-700">備考</th>
+                  <th className="border-b px-2 py-1 text-left">列</th>
                 </tr>
               </thead>
               <tbody>
-                {[
-                  { name: '対応者', physical: 'user_name', type: 'VARCHAR', note: '作業履歴表示' },
-                  { name: '対応日時', physical: 'work_date', type: 'TIMESTAMP', note: '作業履歴表示' },
-                  { name: '対応時間', physical: 'work_time', type: 'DECIMAL', note: '時間単位' },
-                  { name: '作業内容', physical: 'work_detail', type: 'TEXT', note: '作業履歴表示' },
-                ].map((item, i) => (
+                {['ログインID', 'ユーザー名', '管理者フラグ', '作成日時', '操作'].map((col, i) => (
                   <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                    <td className="border-b border-gray-100 px-2 py-1">{item.name}</td>
-                    <td className="border-b border-gray-100 px-2 py-1 font-mono text-gray-600">{item.physical}</td>
-                    <td className="border-b border-gray-100 px-2 py-1 font-mono text-gray-600">{item.type}</td>
-                    <td className="border-b border-gray-100 px-2 py-1 text-gray-500">{item.note}</td>
+                    <td className="border-b border-gray-100 px-2 py-1">{col}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-          {/* 履歴追加入力 */}
           <div>
-            <div className="text-xs font-semibold text-gray-600 mb-1">履歴追加 - 入力項目</div>
-            <InputTable items={[
-              { name: '対応者', physical: 'user_id', type: 'BIGINT', note: '必須、選択式' },
-              { name: '対応日時', physical: 'work_date', type: 'TIMESTAMP', note: '必須' },
-              { name: '対応時間', physical: 'work_time', type: 'DECIMAL', note: '必須、時間単位' },
-              { name: '作業内容', physical: 'work_detail', type: 'TEXT', note: '必須、複数行' },
+            <div className="text-xs font-semibold text-gray-600 mb-1">モーダル入力項目</div>
+            <FormInputTable items={[
+              { name: 'ログインID', physical: 'login_id', type: 'VARCHAR', required: true },
+              { name: 'パスワード', physical: 'password', type: 'VARCHAR', required: true },
+              { name: 'ユーザー名', physical: 'user_name', type: 'VARCHAR', required: true },
+              { name: '管理者区分', physical: 'is_admin', type: 'BOOLEAN', required: true },
             ]} />
           </div>
-          {/* イベント・ボタン・遷移 */}
-          <div className="grid grid-cols-4 gap-3">
-            <div>
-              <div className="text-xs font-semibold text-gray-600 mb-1">イベント一覧</div>
-              <EventTable events={[
-                { trigger: '更新押下', success: '情報更新', failure: 'エラー表示' },
-                { trigger: '履歴追加押下', success: '履歴保存→画面更新', failure: 'エラー表示' },
-                { trigger: '完了押下', success: 'ステータス完了へ変更（確認ダイアログ）' },
-                { trigger: '戻る押下', success: '一覧へ遷移' },
-              ]} />
-            </div>
-            <div>
-              <div className="text-xs font-semibold text-gray-600 mb-1">ボタン一覧</div>
-              <div className="flex flex-wrap gap-1">
-                <button className="bg-blue-600 text-white px-2 py-1 rounded text-xs">更新</button>
-                <button className="bg-blue-500 text-white px-2 py-1 rounded text-xs">履歴追加</button>
-                <button className="bg-green-500 text-white px-2 py-1 rounded text-xs">完了</button>
-                <button className="border border-gray-300 px-2 py-1 rounded text-xs">戻る</button>
-              </div>
-            </div>
-            <div>
-              <div className="text-xs font-semibold text-gray-600 mb-1">画面遷移</div>
-              <div className="border border-gray-200 rounded p-2 bg-gray-50 text-xs space-y-1">
-                <div className="flex items-center gap-1">
-                  <span className="text-gray-500">SCR003</span>
-                  <span>-&gt;</span>
-                  <span className="text-gray-700">SCR005（詳細）</span>
-                </div>
-                <div className="flex items-center gap-1">
-                  <span className="text-gray-500">完了後</span>
-                  <span>-&gt;</span>
-                  <span className="text-gray-700">SCR003</span>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div className="text-xs font-semibold text-gray-600 mb-1">権限制御</div>
-              <div className="space-y-1 text-xs">
-                <div className="flex items-center gap-1">
-                  <span className="text-green-600">●</span>
-                  <span>一般ユーザー: 利用可能</span>
-                </div>
-                <div className="flex items-center gap-1">
-                  <span className="text-green-600">●</span>
-                  <span>管理者: 利用可能</span>
-                </div>
-              </div>
-              <div className="text-xs font-semibold text-gray-600 mt-2 mb-1">エラーメッセージ</div>
-              <div className="space-y-1 text-xs">
-                <div className="bg-red-50 text-red-600 px-2 py-0.5 rounded">履歴の追加に失敗しました</div>
-                <div className="bg-red-50 text-red-600 px-2 py-0.5 rounded">必須項目が未入力です</div>
-              </div>
+        </div>
+        <div className="grid grid-cols-4 gap-3">
+          <div>
+            <div className="text-xs font-semibold text-gray-600 mb-1">ボタン一覧</div>
+            <div className="flex flex-wrap gap-1">
+              <button className="bg-blue-600 text-white px-2 py-1 rounded text-xs">新規登録</button>
+              <button className="bg-blue-600 text-white px-2 py-1 rounded text-xs">保存</button>
+              <button className="bg-red-600 text-white px-2 py-1 rounded text-xs">削除</button>
+              <button className="border border-gray-300 px-2 py-1 rounded text-xs">閉じる</button>
             </div>
           </div>
           <div>
-            <div className="text-xs font-semibold text-gray-600 mb-1">使用共通部品</div>
+            <div className="text-xs font-semibold text-gray-600 mb-1">イベント一覧</div>
+            <EventTable events={[
+              { trigger: '検索', success: '一覧更新' },
+              { trigger: 'クリア', success: '条件クリア' },
+              { trigger: '新規登録', success: 'モーダル表示' },
+              { trigger: '編集', success: 'モーダル表示' },
+              { trigger: '保存', success: '登録/更新' },
+              { trigger: '削除', success: '削除処理' },
+            ]} />
+          </div>
+          <div>
+            <div className="text-xs font-semibold text-gray-600 mb-1">権限制御</div>
+            <div className="space-y-1 text-xs">
+              <div className="flex items-center gap-1">
+                <span className="text-red-600">x</span>
+                <span>一般ユーザー: 利用不可</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <span className="text-green-600">●</span>
+                <span className="text-blue-600 font-semibold">管理者: 利用可能</span>
+              </div>
+            </div>
+            <div className="text-xs font-semibold text-gray-600 mt-2 mb-1">使用共通部品</div>
             <div className="flex flex-wrap gap-1">
-              {['詳細表示パネル', 'Bootstrap テーブル', 'ステータスバッジ', '入力フォーム', '確認ダイアログ', '日時ピッカー'].map((c) => (
+              {['検索パネル', 'テーブル', 'モーダル', 'ページネーション'].map((c) => (
                 <span key={c} className="bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded text-xs">{c}</span>
+              ))}
+            </div>
+          </div>
+          <div>
+            <div className="text-xs font-semibold text-gray-600 mb-1">エラーメッセージ</div>
+            <div className="space-y-1">
+              {['ログインIDを入力してください', 'ユーザー名を入力', 'パスワードを入力', '登録に失敗', '更新に失敗', '削除に失敗'].map((e) => (
+                <div key={e} className="bg-red-50 text-red-600 px-2 py-0.5 rounded text-xs">{e}</div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </ScreenSection>
+
+      {/* SCR007 Customer Master */}
+      <ScreenSection
+        id="SCR007"
+        title="顧客マスタ"
+        description="顧客情報を管理する。管理者のみ利用可能。"
+        api="GET/POST/PUT /customers"
+        tables={['customers']}
+        layoutDiagram={
+          <LayoutDiagram title="画面構成図">
+            <div className="border border-gray-400 rounded bg-white overflow-hidden">
+              <div className="bg-gray-700 text-white text-xs text-center py-1">ヘッダー</div>
+              <div className="p-2">
+                <div className="border border-gray-200 rounded p-1.5 bg-gray-50 mb-2">
+                  <span className="text-xs font-semibold">検索条件</span>
+                  <div className="flex gap-1 mt-1">
+                    <input className="border border-gray-300 rounded px-1 py-0.5 text-xs flex-1" placeholder="顧客名" />
+                    <button className="bg-blue-600 text-white px-2 py-0.5 rounded text-xs">検索</button>
+                    <button className="border border-gray-300 px-2 py-0.5 rounded text-xs">クリア</button>
+                  </div>
+                </div>
+                <div className="text-right mb-1">
+                  <button className="bg-blue-600 text-white px-2 py-0.5 rounded text-xs">新規登録</button>
+                </div>
+                <table className="w-full text-xs border border-gray-200 mb-2">
+                  <thead className="bg-gray-100">
+                    <tr>
+                      <th className="border-b px-1 py-0.5">顧客ID</th>
+                      <th className="border-b px-1 py-0.5">顧客名</th>
+                      <th className="border-b px-1 py-0.5">作成日時</th>
+                      <th className="border-b px-1 py-0.5">操作</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="bg-gray-50">
+                      <td className="border-b px-1 py-0.5">1</td>
+                      <td className="border-b px-1 py-0.5">株式会社サンプル</td>
+                      <td className="border-b px-1 py-0.5">2024/01/01</td>
+                      <td className="border-b px-1 py-0.5">
+                        <button className="text-blue-600 text-xs">編集</button>
+                        <button className="text-red-600 text-xs ml-1">削除</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div className="flex justify-center gap-0.5">
+                  {['1', '2', '3'].map((p) => (
+                    <button key={p} className={`px-2 py-0.5 rounded text-xs ${p === '1' ? 'bg-blue-500 text-white' : 'border'}`}>{p}</button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </LayoutDiagram>
+        }
+      >
+        <div className="grid grid-cols-3 gap-3 mb-3">
+          <div>
+            <div className="text-xs font-semibold text-gray-600 mb-1">検索条件</div>
+            <FormInputTable items={[
+              { name: '顧客名', physical: 'customer_name', type: 'VARCHAR', required: false },
+            ]} />
+          </div>
+          <div>
+            <div className="text-xs font-semibold text-gray-600 mb-1">一覧テーブル</div>
+            <table className="w-full text-xs border border-gray-200">
+              <thead className="bg-gray-100">
+                <tr>
+                  <th className="border-b px-2 py-1 text-left">列</th>
+                </tr>
+              </thead>
+              <tbody>
+                {['顧客ID', '顧客名', '作成日時', '操作'].map((col, i) => (
+                  <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                    <td className="border-b border-gray-100 px-2 py-1">{col}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <div className="text-xs font-semibold text-gray-600 mb-1">モーダル入力項目</div>
+            <FormInputTable items={[
+              { name: '顧客名', physical: 'customer_name', type: 'VARCHAR', required: true },
+            ]} />
+          </div>
+        </div>
+        <div className="grid grid-cols-4 gap-3">
+          <div>
+            <div className="text-xs font-semibold text-gray-600 mb-1">ボタン一覧</div>
+            <div className="flex flex-wrap gap-1">
+              <button className="bg-blue-600 text-white px-2 py-1 rounded text-xs">新規登録</button>
+              <button className="bg-blue-600 text-white px-2 py-1 rounded text-xs">保存</button>
+              <button className="bg-red-600 text-white px-2 py-1 rounded text-xs">削除</button>
+              <button className="border border-gray-300 px-2 py-1 rounded text-xs">閉じる</button>
+            </div>
+          </div>
+          <div>
+            <div className="text-xs font-semibold text-gray-600 mb-1">イベント一覧</div>
+            <EventTable events={[
+              { trigger: '検索', success: '一覧更新' },
+              { trigger: 'クリア', success: '条件クリア' },
+              { trigger: '新規登録', success: 'モーダル表示' },
+              { trigger: '編集', success: 'モーダル表示' },
+              { trigger: '保存', success: '登録/更新' },
+              { trigger: '削除', success: '削除処理' },
+            ]} />
+          </div>
+          <div>
+            <div className="text-xs font-semibold text-gray-600 mb-1">権限制御</div>
+            <div className="space-y-1 text-xs">
+              <div className="flex items-center gap-1">
+                <span className="text-red-600">x</span>
+                <span>一般ユーザー: 利用不可</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <span className="text-green-600">●</span>
+                <span className="text-blue-600 font-semibold">管理者: 利用可能</span>
+              </div>
+            </div>
+            <div className="text-xs font-semibold text-gray-600 mt-2 mb-1">使用共通部品</div>
+            <div className="flex flex-wrap gap-1">
+              {['検索パネル', 'テーブル', 'モーダル', 'ページネーション'].map((c) => (
+                <span key={c} className="bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded text-xs">{c}</span>
+              ))}
+            </div>
+          </div>
+          <div>
+            <div className="text-xs font-semibold text-gray-600 mb-1">エラーメッセージ</div>
+            <div className="space-y-1">
+              {['顧客名を入力してください', '登録に失敗しました', '更新に失敗しました', '削除に失敗しました'].map((e) => (
+                <div key={e} className="bg-red-50 text-red-600 px-2 py-0.5 rounded text-xs">{e}</div>
               ))}
             </div>
           </div>
